@@ -5,7 +5,7 @@ extends Node3D
 # indicates if it is possible to fire
 var _isFireEnebled : bool = true
 
-func _input(event) -> void:
+func _input(_event) -> void:
 	# If the character is moving
 	if owner.get_movementComponent().get_isMoving():
 		

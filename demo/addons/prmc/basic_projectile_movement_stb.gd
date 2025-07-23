@@ -9,6 +9,7 @@ func set_IsEnabled(value : bool) -> void :
 func get_IsEnabled() -> bool :
 	return _isEnabled
 
+
 ## Indicates if the parent Actor is blocked with the first hit
 @export var _isBlockedByCollision : bool = false
 
@@ -44,6 +45,12 @@ signal _collisionTakenPlace
 # Geting the actor this component is attached to
 @onready var _myActor : StaticBody3D = get_parent()
 
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_collision = null
+		_myActor = null
+
 # Doing the signal conection
 func _ready() -> void:
 	if collisionHandler != "":
@@ -58,7 +65,7 @@ func _ready() -> void:
 # Moving the parent actor detecting a collision
 func _physics_process(delta: float) -> void:
 	# Only if it is enabled
-	if _isEnabled :
+	if _isEnabled and _myActor != null:
 		# It is allowed to move if there is not a collision or there is no right collisionHandler defined
 		# If there is a collisionHandler defined the movement stops and the handler resolves the situation
 		if _collision == null or not _isBlockedByCollision:

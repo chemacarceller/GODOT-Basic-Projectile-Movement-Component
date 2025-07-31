@@ -1,4 +1,4 @@
-extends StaticBody3D
+class_name Bullet extends StaticBody3D
 
 # This method is called when the basic-projectile-movement-component detects a collision
 # Configure as a parameter in the component
